@@ -12,14 +12,23 @@ import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import { authFormSchema } from "@/lib/utils";
 
-const formSchema = authFormSchema("");
+// const formSchema = authFormSchema("");
+
+type FormSchemaType = z.infer<ReturnType<typeof authFormSchema>>;
 
 interface CustomFormInput {
-  control: Control<z.infer<typeof formSchema>>;
-  name: FieldPath<z.infer<typeof formSchema>>;
+  control: Control<FormSchemaType>;
+  name: FieldPath<FormSchemaType>;
   label: string;
   placeholder: string;
 }
+
+// interface CustomFormInput {
+//   control: Control<z.infer<typeof formSchema>>;
+//   name: FieldPath<z.infer<typeof formSchema>>;
+//   label: string;
+//   placeholder: string;
+// }
 
 const CustomFormInput = ({
   control,

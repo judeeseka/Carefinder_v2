@@ -1,6 +1,10 @@
 import ProviderCards from "@/components/home-layout/ProviderCards";
 import ProviderPagination from "@/components/home-layout/ProviderPagination";
 import ProviderSearchControls from "@/components/home-layout/ProviderSearchControls";
+import SkeletonCard from "@/components/home-layout/SkeletonCard";
+import SkeletonControls from "@/components/home-layout/SkeletonControls";
+import SkeletonPagination from "@/components/home-layout/SkeletonPagination";
+import { Suspense } from "react";
 // import { getSelectOptions } from "@/lib/actions/provider.action";
 // import {
 //   dehydrate,
@@ -95,12 +99,20 @@ const SearchProviders = async () =>
         <h2 className="font-bold text-2xl md:text-5xl text-center my-2">
           Explore our providers
         </h2>
-
-        <ProviderSearchControls
+        <Suspense fallback={<SkeletonControls />}>
+          <ProviderSearchControls />
+        </Suspense>
+        <Suspense fallback={<SkeletonCard />}>
+          <ProviderCards />
+        </Suspense>
+        <Suspense fallback={<SkeletonPagination />}>
+          <ProviderPagination />
+        </Suspense>
+        {/* <ProviderSearchControls
         // stateOptions={uniqueStatesArray}
         // providerOptions={uniqueTypesArray}
         // initialOptions={selectOptions}
-        />
+        /> */}
 
         {/* <Suspense
           fallback={
@@ -111,8 +123,8 @@ const SearchProviders = async () =>
           <ProviderCards initialProviders={fetchTotal} />
         </Suspense>  */}
 
-        <ProviderCards />
-        <ProviderPagination />
+        {/* <ProviderCards />
+        <ProviderPagination /> */}
 
         {/* <ProviderPagination totalPages={initialProviders?.total as number} /> */}
       </section>

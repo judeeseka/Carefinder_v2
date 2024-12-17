@@ -14,6 +14,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPaginationItems } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { getProviders } from "@/lib/actions/provider.action";
+import SkeletonPagination from "./SkeletonPagination";
 
 const ProviderPagination = () => {
   const [isPending, startTransition] = useTransition();
@@ -65,19 +66,20 @@ const ProviderPagination = () => {
   ) {
     // Render loading or skeleton for the pagination to avoid mismatches
     return (
-      <Pagination className="mt-4">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious className="border border-full" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext className="border border-full" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      // <Pagination className="mt-4">
+      //   <PaginationContent>
+      //     <PaginationItem>
+      //       <PaginationPrevious className="border border-full" />
+      //     </PaginationItem>
+      //     <PaginationItem>
+      //       <PaginationEllipsis />
+      //     </PaginationItem>
+      //     <PaginationItem>
+      //       <PaginationNext className="border border-full" />
+      //     </PaginationItem>
+      //   </PaginationContent>
+      // </Pagination>
+      <SkeletonPagination />
     );
   }
   return (

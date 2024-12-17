@@ -1,9 +1,12 @@
 "use server";
 
-import { ID, Models } from "node-appwrite";
+import {
+  ID,
+  //  Models
+} from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { parseStringify } from "../utils";
+// import { parseStringify } from "../utils";
 
 export const signIn = async ({
   email,
@@ -24,7 +27,8 @@ export const signIn = async ({
       sameSite: "strict",
       secure: true,
     });
-    return parseStringify(response);
+    // return parseStringify(response);
+    return response;
   } catch (error) {
     console.log("Error", error);
   }
@@ -49,31 +53,38 @@ export const signUp = async (userData: SignUpParams) => {
       secure: true,
     });
 
-    return parseStringify(newUserAccount);
+    // return parseStringify(newUserAccount);
+    return newUserAccount;
   } catch (error) {
     console.log("Error", error);
   }
 };
 
-export async function getLoggedInUser(): Promise<Models.User<Models.Preferences> | null> {
+export async function getLoggedInUser() {
+  // : Promise<Models.User<Models.Preferences> | null>
   try {
-    const { account } = await createSessionClient();
-    const user = await account.get();
+    // const { account } = await createSessionClient();
+    const client = await createSessionClient();
+    const user = await client?.account.get();
 
-    return parseStringify(user);
+    // return parseStringify(user);
+    return user;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }
 
 export async function logoutAccount() {
   try {
-    const { account } = await createSessionClient();
+    // const { account } = await createSessionClient();
+    const client = await createSessionClient();
 
     (await cookies()).delete("appwrite-session");
 
-    await account.deleteSession("current");
+    await client?.account.deleteSession("current");
   } catch (error) {
+    console.error(error);
     return null;
   }
 }

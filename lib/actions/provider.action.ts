@@ -2,7 +2,7 @@
 
 import { Models, Query } from "node-appwrite";
 import { createAdminClient } from "../appwrite";
-import { parseStringify } from "../utils";
+// import { parseStringify } from "../utils";
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -88,7 +88,8 @@ export async function getProviders(
       ]
     );
 
-    return parseStringify(result);
+    return result;
+    // return parseStringify(result);
   } catch (error) {
     console.log(error);
   }
@@ -103,7 +104,8 @@ export async function getTotalPages() {
       HEALTHPROVIDERS_COLLECTION_ID!
     );
 
-    return parseStringify(result.total);
+    // return parseStringify(result.total);
+    return result.total;
   } catch (error) {
     console.log(error);
   }

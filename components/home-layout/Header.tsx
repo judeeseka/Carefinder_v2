@@ -39,6 +39,20 @@ const Header = async ({ type }: { type: string }) => {
             );
           })}
 
+          {/* {loggedIn ? (
+            <Button asChild variant="outline">
+              <Link href="/dashboard">
+                Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild variant="outline">
+              <Link href="/sign-in" className="flex items-center">
+                Sign In <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          )} */}
+
           {loggedIn && loggedIn.status ? (
             <Button asChild variant="outline">
               <Link href="/dashboard">

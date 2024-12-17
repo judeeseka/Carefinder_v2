@@ -9,8 +9,10 @@ import { useRouter } from "next/navigation";
 
 const SidebarFooter = ({ user, type = "desktop" }: SideFooterProps) => {
   const router = useRouter();
-  const [firstName, lastName] = user?.name?.split(" ");
-  const initials = `${firstName[0]}${lastName[0]}` || "AD";
+  // const [firstName, lastName] = user?.name?.split(" ");
+  // const initials = `${firstName[0]}${lastName[0]}` || "AD";
+  const [firstName = "", lastName = ""] = user?.name?.split(" ") || [];
+  const initials = (firstName[0] || "") + (lastName[0] || "") || "AD";
 
   const handleLogOut = async () => {
     const loggedOut = await logoutAccount();
